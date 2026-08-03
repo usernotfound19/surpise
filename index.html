@@ -97,7 +97,7 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Hidden Sections */
+    /* Hidden Gallery Section */
     #gallery-section {
       display: none;
       margin-top: 30px;
@@ -106,14 +106,15 @@
     .gallery {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 15px;
       flex-wrap: wrap;
       margin-top: 15px;
     }
 
-    .gallery img {
+    .gallery img, .gallery video {
       width: 160px;
-      height: 180px;
+      height: 200px;
       object-fit: cover;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
@@ -147,18 +148,22 @@
     <!-- 3. Button appears after letter finishes -->
     <button id="next-btn" onclick="showGallery()">Cutush girl 💖</button>
 
-    <!-- 4. Photo Gallery Section -->
+    <!-- 4. Photos & Video Section -->
     <div id="gallery-section">
       <h2>Our Memories 📸</h2>
       <div class="gallery">
-        <img src="./photo1.jpeg" alt="Memory 1">
-        <img src="./photo2.jpeg" alt="Memory 2">
-        <img src="./photo3.jpeg" alt="Memory 3">
+        <img src="./photo_6305147037644690448_y.jpg" alt="Memory 1">
+        <video controls>
+          <source src="./document_6305147037184697619.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <img src="./photo_6305147037644690449_y.jpg" alt="Memory 2">
       </div>
     </div>
 
+    <!-- Audio Element (Audio file name matched) -->
     <audio id="music" loop>
-      <source src="./song.mp3" type="audio/mpeg">
+      <source src="./YTDown.com_YouTube_Shawn-Mendes-Treat-Y.mp3" type="audio/mpeg">
     </audio>
 
     <footer>
@@ -167,8 +172,8 @@
   </div>
 
   <script>
-    // 🔑 আপনার পিন কোডটি এখানে দিন (এখন 1234 দেওয়া আছে)
-    const CORRECT_PIN = "1234";
+    // 🔑 পিন কোড পরিবর্তন করতে চাইলে এখানে চেঞ্জ করুন (এখন 1234 দেওয়া আছে)
+    const CORRECT_PIN = "200610";
 
     const fullText = `My love,\n\nThis small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined possible.\n\nI need you to understand that my intentions with you are true and everlasting. I am here to stand by your side, not just in your best moments, but especially during your lowest. Seeing you happy brings absolute peace to my heart.\n\nI want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to convince both our families so we can be together forever.\n\nI love you infinitely ❤️`;
 
@@ -178,9 +183,9 @@
       if (inputPin === CORRECT_PIN) {
         document.getElementById("pin-screen").style.display = "none";
         
-        // 🎵 পিন সঠিক হলে সাথে সাথে গান স্টার্ট হবে
+        // 🎵 পিন ম্যাচ করলে ব্যাকগ্রাউন্ড গান স্টার্ট হবে
         const music = document.getElementById("music");
-        music.play();
+        music.play().catch(e => console.log("Audio autoplay prevented"));
 
         typeWriter(); // টাইপরাইটার অ্যানিমেশন শুরু
       } else {
