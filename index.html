@@ -2,29 +2,105 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For My Lovelove ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You, My Love 💕</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
-      color: #fff;
+      background-color: #ffb6c1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
     }
 
-    h1 {
-      margin-top: 40px;
-      font-size: 3em;
+    /* Pin Lock Screen Overlay */
+    #pin-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #ff99aa;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #pin-screen input {
+      padding: 10px 15px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      border: none;
+      text-align: center;
+      outline: none;
+      margin-top: 10px;
+      width: 150px;
+    }
+
+    #pin-screen button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      border: none;
+      background: #fff;
+      color: #ff5e7e;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    #error-msg {
+      color: #d8000c;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 650px;
+      margin: 0 auto;
     }
 
     .letter {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
       padding: 25px;
       border-radius: 20px;
-      max-width: 700px;
-      margin: 30px auto;
-      font-size: 1.2em;
       line-height: 1.6;
+      font-size: 1.05rem;
+      text-align: center;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      min-height: 150px;
+    }
+
+    /* Action Button after letter finishes */
+    #next-btn {
+      display: none;
+      margin: 25px auto;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff5e7e;
+      background-color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Hidden Sections */
+    #gallery-section {
+      display: none;
+      margin-top: 30px;
     }
 
     .gallery {
@@ -32,86 +108,116 @@
       justify-content: center;
       gap: 15px;
       flex-wrap: wrap;
-      margin: 40px;
+      margin-top: 15px;
     }
 
     .gallery img {
-      width: 200px;
-      height: 200px;
+      width: 160px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    }
-
-    button {
-      background: #fff;
-      color: #ff4b6e;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 25px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-top: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     footer {
-      margin: 40px 0;
-      font-size: 1em;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
-<h1>For You, My Love 💕</h1>
+  <!-- 1. PIN Screen -->
+  <div id="pin-screen">
+    <h2>Enter Passcode 🔒</h2>
+    <input type="password" id="pin-input" placeholder="Enter PIN">
+    <button onclick="checkPin()">Unlock 💕</button>
+    <div id="error-msg">Wrong Passcode! Try again 😉</div>
+  </div>
 
-<div class="letter">
- <p id="typed-text"></p>
-</div>
+  <!-- 2. Main Letter Container -->
+  <div class="container">
+    <h1>For You, My Love 💕</h1>
 
-<h2>Our Memories 📸</h2>
-<div class="gallery">
-  <img src="./photo1.jpeg" alt="Memory 1">
-  <img src="./photo2.jpeg" alt="Memory 2">
-  <img src="./photo3.jpeg" alt="Memory 3">
-</div>
+    <div class="letter">
+      <p id="typed-text"></p>
+    </div>
 
-<button onclick="playMusic()">Play Our Song 🎵</button>
+    <!-- 3. Button appears after letter finishes -->
+    <button id="next-btn" onclick="showGallery()">Cutush girl 💖</button>
 
-<audio id="music" loop>
-  <source src="./song.mp3" type="audio/mpeg">
-</audio>
+    <!-- 4. Photo Gallery Section -->
+    <div id="gallery-section">
+      <h2>Our Memories 📸</h2>
+      <div class="gallery">
+        <img src="./photo1.jpeg" alt="Memory 1">
+        <img src="./photo2.jpeg" alt="Memory 2">
+        <img src="./photo3.jpeg" alt="Memory 3">
+      </div>
+    </div>
 
-<script>
-  function playMusic() {
-    const music = document.getElementById("music");
-    music.play();
-  }
+    <audio id="music" loop>
+      <source src="./song.mp3" type="audio/mpeg">
+    </audio>
 
-  const fullText = `My love,\n\nThis small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined possible.\n\nI need you to understand that my intentions with you are true and everlasting. I am here to stand by your side, not just in your best moments, but especially during your lowest. Seeing you happy brings absolute peace to my heart.\n\nI want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to convince both our families so we can be together forever.\n\nI love you infinitely ❤️`;
+    <footer>
+      Made by Adi 🤪 🤍
+    </footer>
+  </div>
 
-  let index = 0;
-  function typeWriter() {
-    if (index < fullText.length) {
-      const char = fullText.charAt(index);
-      const target = document.getElementById("typed-text");
-      
-      if (char === '\n') {
-        target.innerHTML += '<br>';
+  <script>
+    // 🔑 আপনার পিন কোডটি এখানে দিন (এখন 1234 দেওয়া আছে)
+    const CORRECT_PIN = "1234";
+
+    const fullText = `My love,\n\nThis small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined possible.\n\nI need you to understand that my intentions with you are true and everlasting. I am here to stand by your side, not just in your best moments, but especially during your lowest. Seeing you happy brings absolute peace to my heart.\n\nI want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to convince both our families so we can be together forever.\n\nI love you infinitely ❤️`;
+
+    // PIN Check & Auto Play Music
+    function checkPin() {
+      const inputPin = document.getElementById("pin-input").value;
+      if (inputPin === CORRECT_PIN) {
+        document.getElementById("pin-screen").style.display = "none";
+        
+        // 🎵 পিন সঠিক হলে সাথে সাথে গান স্টার্ট হবে
+        const music = document.getElementById("music");
+        music.play();
+
+        typeWriter(); // টাইপরাইটার অ্যানিমেশন শুরু
       } else {
-        target.innerHTML += char;
+        document.getElementById("error-msg").style.display = "block";
       }
-      
-      index++;
-      setTimeout(typeWriter, 35);
     }
-  }
 
-  window.onload = typeWriter;
-</script>
+    // Typewriter Animation Function
+    let index = 0;
+    function typeWriter() {
+      if (index < fullText.length) {
+        const char = fullText.charAt(index);
+        const target = document.getElementById("typed-text");
+        
+        if (char === '\n') {
+          target.innerHTML += '<br>';
+        } else {
+          target.innerHTML += char;
+        }
+        
+        index++;
+        setTimeout(typeWriter, 35);
+      } else {
+        // টাইপিং শেষ হলে 'Cutush girl' বাটন দেখাবে
+        document.getElementById("next-btn").style.display = "block";
+      }
+    }
 
-<footer>
- Made by Adi 🤪🤍
-</footer>
-
+    // Show Gallery Function
+    function showGallery() {
+      document.getElementById("gallery-section").style.display = "block";
+      document.getElementById("next-btn").style.display = "none";
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </body>
 </html>
