@@ -65,17 +65,7 @@
 <h1>For You, My Love 💕</h1>
 
 <div class="letter">
- <p>
-  My love,<br><br>
-
-   This small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined I could be.
-
-I need you to understand that my intentions with you are true and everlasting. I am here to help you create a future for yourself; to be there for you during your good times but more so during your bad times. Nothing gives me greater satisfaction than making sure you’re smiling all the time, and my only concern is keeping you happy.
-
-I want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to make both our families marry us into each other. I choose you—everyday and every moment for eternity.
-
-I love you infinitely ❤️
-</p>
+ <p id="typed-text"></p>
 </div>
 
 <h2>Our Memories 📸</h2>
@@ -92,10 +82,31 @@ I love you infinitely ❤️
 </audio>
 
 <script>
-function playMusic() {
-  const music = document.getElementById("music");
-  music.play();
-}
+  function playMusic() {
+    const music = document.getElementById("music");
+    music.play();
+  }
+
+  const fullText = `My love,\n\nThis small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined possible.\n\nI need you to understand that my intentions with you are true and everlasting. I am here to stand by your side, not just in your best moments, but especially during your lowest. Seeing you happy brings absolute peace to my heart.\n\nI want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to convince both our families so we can be together forever.\n\nI love you infinitely ❤️`;
+
+  let index = 0;
+  function typeWriter() {
+    if (index < fullText.length) {
+      const char = fullText.charAt(index);
+      const target = document.getElementById("typed-text");
+      
+      if (char === '\n') {
+        target.innerHTML += '<br>';
+      } else {
+        target.innerHTML += char;
+      }
+      
+      index++;
+      setTimeout(typeWriter, 35);
+    }
+  }
+
+  window.onload = typeWriter;
 </script>
 
 <footer>
