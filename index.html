@@ -161,9 +161,9 @@
       </div>
     </div>
 
-    <!-- Audio Element (Audio file name matched) -->
+    <!-- Audio Element -->
     <audio id="music" loop>
-      <source src="./YTDown.com_YouTube_Shawn-Mendes-Treat-Y.mp3" type="audio/mpeg">
+      <source src="./song.mp3" type="audio/mpeg">
     </audio>
 
     <footer>
@@ -172,22 +172,26 @@
   </div>
 
   <script>
-    // 🔑 পিন কোড পরিবর্তন করতে চাইলে এখানে চেঞ্জ করুন (এখন 1234 দেওয়া আছে)
-    const CORRECT_PIN = "200610";
+    // 🔑 পিন কোডটি এখানে ইচ্ছেমতো সেট করতে পারেন (এখন 1234 দেওয়া আছে)
+    const CORRECT_PIN = "1234";
 
     const fullText = `My love,\n\nThis small place has been made just for you. I have already grown more in love with you in such a little time than I ever imagined possible.\n\nI need you to understand that my intentions with you are true and everlasting. I am here to stand by your side, not just in your best moments, but especially during your lowest. Seeing you happy brings absolute peace to my heart.\n\nI want to spend the rest of my life with you. As soon as the right time comes, I will go to any lengths to convince both our families so we can be together forever.\n\nI love you infinitely ❤️`;
 
-    // PIN Check & Auto Play Music
+    // PIN Check & Force Start Audio
     function checkPin() {
       const inputPin = document.getElementById("pin-input").value;
       if (inputPin === CORRECT_PIN) {
-        document.getElementById("pin-screen").style.display = "none";
-        
-        // 🎵 পিন ম্যাচ করলে ব্যাকগ্রাউন্ড গান স্টার্ট হবে
+        // ১. অডিও স্টার্ট
         const music = document.getElementById("music");
-        music.play().catch(e => console.log("Audio autoplay prevented"));
+        music.play().then(() => {
+          console.log("Music playing!");
+        }).catch(e => {
+          console.log("Audio play error:", e);
+        });
 
-        typeWriter(); // টাইপরাইটার অ্যানিমেশন শুরু
+        // ২. পিন স্ক্রিন হাইড এবং টাইপিং স্টার্ট
+        document.getElementById("pin-screen").style.display = "none";
+        typeWriter();
       } else {
         document.getElementById("error-msg").style.display = "block";
       }
